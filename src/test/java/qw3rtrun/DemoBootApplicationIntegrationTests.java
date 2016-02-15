@@ -13,7 +13,6 @@ import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.context.WebApplicationContext;
-import org.unitils.UnitilsJUnit4;
 
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
@@ -22,7 +21,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 @SpringApplicationConfiguration(classes = DemoBootApplication.class)
 @WebIntegrationTest
 @Transactional
-public class DemoBootApplicationIntegrationTests extends UnitilsJUnit4 {
+public class DemoBootApplicationIntegrationTests {
 
     private MockMvc mockMvc;
 
@@ -32,17 +31,7 @@ public class DemoBootApplicationIntegrationTests extends UnitilsJUnit4 {
     @Before
     public void setUp() {
         this.mockMvc = MockMvcBuilders.webAppContextSetup(wac).build();
-    }
-
-    @Test
-    public void contextLoads() {
-    }
-
-    @Test
-    public void helloTest() throws Exception {
-        mockMvc.perform(MockMvcRequestBuilders.get("/api/vasya"))
-                .andDo(print())
-                .andExpect(status().isOk());
+//        Liquibase db = new Liquibase("classpath:changelogs.groovy", new FileSystemResourceAccessor(), )
     }
 
     @Test
@@ -94,7 +83,7 @@ public class DemoBootApplicationIntegrationTests extends UnitilsJUnit4 {
         mockMvc.perform(MockMvcRequestBuilders.put("/ent").content("petya"))
                 .andDo(print())
                 .andExpect(status().isOk());
-        mockMvc.perform(MockMvcRequestBuilders.post("/ent/1").content("masha"))
+        mockMvc.perform(MockMvcRequestBuilders.post("/ent/0").content("masha"))
                 .andDo(print())
                 .andExpect(status().isOk());
     }

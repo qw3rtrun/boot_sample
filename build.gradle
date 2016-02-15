@@ -14,7 +14,6 @@ buildscript {
 }
 
 apply plugin: 'java'
-apply plugin: 'eclipse'
 apply plugin: 'idea'
 apply plugin: 'spring-boot'
 apply plugin: 'io.spring.dependency-management'
@@ -36,7 +35,7 @@ dependencies {
     compile('org.springframework.boot:spring-boot-starter-web')
     runtime('org.hsqldb:hsqldb')
     testCompile('org.springframework.boot:spring-boot-starter-test')
-    testCompile('org.unitils:unitils-dbunit:3.4.2')
+    testCompile('org.liquibase:liquibase-core:2.0.5')
 }
 
 task wrapper(type: Wrapper) {
@@ -47,7 +46,7 @@ liquibase {
     activities {
         main {
             changeLogFile 'src/main/db/changelogs.groovy'
-            url 'jdbc:hsqldb:file:db/hsql'
+            url 'jdbc:hsqldb:file:~/dev/boot_sample/db/test;shutdown=true'
         }
     }
 }
