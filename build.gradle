@@ -8,8 +8,6 @@ buildscript {
     dependencies {
         classpath("org.springframework.boot:spring-boot-gradle-plugin:${springBootVersion}")
         classpath('io.spring.gradle:dependency-management-plugin:0.5.2.RELEASE')
-        classpath('org.liquibase:liquibase-gradle-plugin:1.2.1')
-        classpath('org.hsqldb:hsqldb:2.3.3')
     }
 }
 
@@ -17,7 +15,6 @@ apply plugin: 'java'
 apply plugin: 'idea'
 apply plugin: 'spring-boot'
 apply plugin: 'io.spring.dependency-management'
-apply plugin: 'org.liquibase.gradle'
 
 jar {
     baseName = 'demo'
@@ -35,18 +32,34 @@ dependencies {
     compile('org.springframework.boot:spring-boot-starter-web')
     runtime('org.hsqldb:hsqldb')
     testCompile('org.springframework.boot:spring-boot-starter-test')
-    testCompile('org.liquibase:liquibase-core:2.0.5')
+    runtime('org.liquibase:liquibase-core:3.4.2')
+    runtime('org.liquibase:liquibase-groovy-dsl:1.2.1')
 }
 
 task wrapper(type: Wrapper) {
     gradleVersion = '2.7'
 }
 
-liquibase {
-    activities {
-        main {
-            changeLogFile 'src/main/db/changelogs.groovy'
-            url 'jdbc:hsqldb:file:~/dev/boot_sample/db/test;shutdown=true'
+sourceSets {
+    integrationTest {
+        java {
+            compileClasspath += main.output + test.output
+            runtimeClasspath += main.output + test.output
+            srcDir file('src/integration-test/java')
         }
+        resources.srcDir file('src/integration-test/resources')
     }
 }
+
+configurations {
+    integrationTestCompile.extendsFrom testCompile
+    integrationTestRuntime.extendsFrom testRuntime
+}
+
+task integrationTest(type: Test) {
+    testClassesDir = sourceSets.integrationTest.output.classesDir
+    classpath = sourceSets.integrationTest.runtimeClasspath
+}
+
+check.dependsOn integrationTest
+integrationTest.mustRunAfter test

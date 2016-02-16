@@ -31,7 +31,6 @@ public class DemoBootApplicationIntegrationTests {
     @Before
     public void setUp() {
         this.mockMvc = MockMvcBuilders.webAppContextSetup(wac).build();
-//        Liquibase db = new Liquibase("classpath:changelogs.groovy", new FileSystemResourceAccessor(), )
     }
 
     @Test

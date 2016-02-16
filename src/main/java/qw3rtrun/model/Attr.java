@@ -15,6 +15,18 @@ public class Attr implements Serializable {
 
     private String name;
 
+    public Attr() {
+    }
+
+    public Attr(String name) {
+        this.name = name;
+    }
+
+    public Attr(long id, String name) {
+        this.id = id;
+        this.name = name;
+    }
+
     public Long getId() {
         return id;
     }
@@ -29,5 +41,13 @@ public class Attr implements Serializable {
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    @Override
+    public String toString() {
+        return "Attr{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                '}';
     }
 }
