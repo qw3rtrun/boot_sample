@@ -13,6 +13,7 @@ public class MyEntity implements Serializable {
 
     private String name;
 
+    @Version
     private Long version;
 
     @OneToMany(mappedBy = "entity", cascade = CascadeType.ALL, orphanRemoval = true)
@@ -27,9 +28,8 @@ public class MyEntity implements Serializable {
         this.version = version;
     }
 
-    public MyEntity(String name, Long version) {
+    public MyEntity(String name) {
         this.name = name;
-        this.version = version;
     }
 
     public Long getId() {

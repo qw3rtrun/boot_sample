@@ -13,18 +13,18 @@ public class Attr implements Serializable {
     @GeneratedValue
     private Long id;
 
-    private String name;
+    private String name = "";
 
-    public Attr() {
-    }
-
-    public Attr(String name) {
-        this.name = name;
+    Attr() {
     }
 
     public Attr(long id, String name) {
         this.id = id;
         this.name = name;
+    }
+
+    public Attr(String name) {
+        setName(name);
     }
 
     public Long getId() {
@@ -40,6 +40,7 @@ public class Attr implements Serializable {
     }
 
     public void setName(String name) {
+        if (name == null) throw new NullPointerException("Name of Arrt can not be null");
         this.name = name;
     }
 

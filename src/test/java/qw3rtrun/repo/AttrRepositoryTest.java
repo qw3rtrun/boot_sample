@@ -29,8 +29,7 @@ import static java.lang.String.format;
 import static org.hamcrest.Matchers.notNullValue;
 import static org.hamcrest.Matchers.nullValue;
 import static org.hamcrest.Matchers.samePropertyValuesAs;
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertThat;
+import static org.junit.Assert.*;
 import static org.springframework.test.jdbc.JdbcTestUtils.countRowsInTableWhere;
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
@@ -66,9 +65,11 @@ public class AttrRepositoryTest {
     @Test
     @Sql
     public void findByNameTest() throws Exception {
-        assertThat(repository.findByName("width"), samePropertyValuesAs(new Attr(2, "width")));
-        assertThat(repository.findByName("length"), samePropertyValuesAs(new Attr(1, "length")));
-        assertThat(repository.findByName("height"), nullValue());
+        assertTrue(repository.findByName("width").isPresent());
+        assertTrue(repository.findByName("length").isPresent());
+        assertFalse(repository.findByName("height").isPresent());
+        assertThat(repository.findByName("width").get(), samePropertyValuesAs(new Attr(2, "width")));
+        assertThat(repository.findByName("length").get(), samePropertyValuesAs(new Attr(1, "length")));
     }
 
 }

@@ -20,7 +20,7 @@ public class MyEntityService {
     private MyEntityRepository repo;
 
     public MyEntity create(String name) {
-        return repo.save(new MyEntity(name, 0L));
+        return repo.save(new MyEntity(name));
     }
 
     public Optional<MyEntity> get(long id) {
