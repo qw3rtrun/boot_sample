@@ -1,7 +1,9 @@
 package qw3rtrun;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.context.annotation.ComponentScan;
 import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
@@ -23,7 +25,6 @@ public class DemoBootApplication {
 
 @RestController
 @RequestMapping("/ent")
-@EnableJpaRepositories
 class EntityRouter {
 
     @Autowired

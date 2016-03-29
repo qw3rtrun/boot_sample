@@ -1,4 +1,4 @@
-package qw3rtrun;
+package qw3rtrun.repo;
 
 import org.springframework.data.repository.CrudRepository;
 import qw3rtrun.model.Attr;

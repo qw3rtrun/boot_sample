@@ -19,6 +19,10 @@ public class MyEntity implements Serializable {
     @OneToMany(mappedBy = "entity", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Value> values;
 
+    @ManyToOne
+    @JoinColumn
+    private Group group;
+
     public MyEntity() {
     }
 
@@ -26,6 +30,11 @@ public class MyEntity implements Serializable {
         this.id = id;
         this.name = name;
         this.version = version;
+    }
+
+    public MyEntity(String name, Group group) {
+        this.name = name;
+        this.group = group;
     }
 
     public MyEntity(String name) {

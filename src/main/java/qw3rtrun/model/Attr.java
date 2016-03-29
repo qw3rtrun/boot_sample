@@ -40,7 +40,7 @@ public class Attr implements Serializable {
     }
 
     public void setName(String name) {
-        if (name == null) throw new NullPointerException("Name of Arrt can not be null");
+        if (name == null) throw new NullPointerException("Name of ATTR can not be null");
         this.name = name;
     }
 
