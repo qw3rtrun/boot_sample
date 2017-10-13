@@ -23,6 +23,16 @@ public class DemoBootApplication {
     }
 }
 
+
+@RestController
+@RequestMapping("/")
+class HelloRouter {
+    @RequestMapping(method = GET)
+    String get() {
+        return "Hello!";
+    }
+}
+
 @RestController
 @RequestMapping("/ent")
 class EntityRouter {

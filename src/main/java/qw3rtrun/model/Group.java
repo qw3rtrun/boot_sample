@@ -5,13 +5,13 @@ import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import java.util.List;
 
-@Entity
+//@Entity
 public class Group {
 
-    @Id
+    //@Id
     private String name;
 
-    @OneToMany(mappedBy = "group")
+    //@OneToMany(mappedBy = "group")
     private List<MyEntity> entities;
 
     public Group() {
